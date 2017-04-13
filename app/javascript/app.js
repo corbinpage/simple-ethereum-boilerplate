@@ -1,12 +1,16 @@
-// Import the page's CSS. Webpack will know what to do with it.
-import "../stylesheets/app.css";
-
 // Import libraries we need.
-import { default as Web3} from 'web3';
+import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract'
 
+
+var Web3 = require('../../node_nodules/web3');
+var contract = require('../../node_nodules/truffle-contract');
+
+
 // Import our contract artifacts and turn them into usable abstractions.
-import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
+var metacoin_artifacts = require('../../node_nodules/truffle-contract');
+
+// import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 var MetaCoin = contract(metacoin_artifacts);
@@ -54,7 +58,9 @@ window.App = {
     var meta;
     MetaCoin.deployed().then(function(instance) {
       meta = instance;
-      return meta.getBalance.call(account, {from: account});
+      return meta.getBalance.call(account, {
+        from: account
+      });
     }).then(function(value) {
       var balance_element = document.getElementById("balance");
       balance_element.innerHTML = value.valueOf();
@@ -75,7 +81,9 @@ window.App = {
     var meta;
     MetaCoin.deployed().then(function(instance) {
       meta = instance;
-      return meta.sendCoin(receiver, amount, {from: account});
+      return meta.sendCoin(receiver, amount, {
+        from: account
+      });
     }).then(function() {
       self.setStatus("Transaction complete!");
       self.refreshBalance();

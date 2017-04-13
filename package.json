@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Super easy starter app for using ethereum smart contracts in a web app",
   "scripts": {
-    "dev": "npm start"
+    "dev": "node app/server.js"
   },
   "author": "Corbin Page",
   "license": "MIT",
